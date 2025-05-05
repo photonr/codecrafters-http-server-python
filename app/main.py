@@ -9,7 +9,11 @@ def main():
     # Uncomment this to pass the first stage
     
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
-    server_socket.accept() # wait for client
+
+    while True:
+        client_socket, address = server_socket.accept()
+        client_socket.sendall("HTTP/1.1 200 OK\r\n\r\n".encode())
+        client_socket.close()
 
 
 if __name__ == "__main__":
